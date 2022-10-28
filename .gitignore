@@ -1,0 +1,13 @@
+# Exclude local and private programs and data
+
+/local/*
+!/local/README.txt
+
+# Exclude temporary and compiler generated files
+
+*~
+*.sw?
+*.sv
+panos[0-9]*
+test[0-9]*
+bundle.js
