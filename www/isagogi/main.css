@@ -1,0 +1,15 @@
+body {
+	font-size: 20px;
+}
+
+label {
+	padding: 4px;
+}
+
+#idKritirio {
+	width: 4em;
+}
+
+.ui-widget {
+	font-size: 0.8em;
+}

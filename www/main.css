@@ -1,0 +1,28 @@
+body {
+	font-size: 24px;
+}
+
+#menu {
+	display: inline-block;
+}
+
+.menuItem {
+	display: block;
+	margin: 16px;
+	padding: 4px;
+
+	background-color: beige;
+
+	border-style: solid;
+	border-width: 1px;
+	border-color: #e3e3e3;
+	border-radius: 4px;
+
+	cursor: pointer;
+}
+
+.menuItem:hover {
+	text-shadow: 0.5px 0px 0px;
+	border-color: #ababab;
+	box-shadow: 4px 4px 6px #d5d5d5;
+}
