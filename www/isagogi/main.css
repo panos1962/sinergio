@@ -6,8 +6,39 @@ label {
 	padding: 4px;
 }
 
+#kritiriaForma {
+	display: inline-block;
+	padding: 8px;
+
+	background-color: beige;
+
+	border-style: solid;
+	border-width: 1px;
+	border-color: #ddddc5;
+	border-radius: 4px;
+}
+
+#kritiriaPanel {
+	display: block;
+	padding: 8px;
+}
+
+#kritiriaPanel input {
+	margin: 4px 8px;
+	cursor: pointer;
+}
+
 #idKritirio {
 	width: 4em;
+}
+
+#apoKritirio,
+#eosKritirio {
+	width: 6em;
+}
+
+#promiKritirio {
+	width: 14em;
 }
 
 .ui-widget {

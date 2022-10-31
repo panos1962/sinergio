@@ -2,14 +2,29 @@
 
 class selida {
 	private static $init_ok = FALSE;
-	private static $root_url;
+	private static $favicon_ok = FALSE;
+	private static $title_ok = FALSE;
+	private static $base_www;
+	private static $base_dir;
 
 	public static function init() {
 		if (self::$init_ok)
 		return __CLASS__;
 
 		self::$init_ok = TRUE;
+		self::base_dir_set();
+		self::base_www_set();
 
+		return __CLASS__;
+	}
+
+	private static function base_dir_set() {
+		self::$base_dir = preg_replace("/\/lib\/selida\.php$/", "", __FILE__);
+
+		return __CLASS__;
+	}
+
+	private static function base_www_set() {
 		$host = $_SERVER["HTTP_HOST"];
 
 		switch ($host) {
@@ -19,18 +34,44 @@ class selida {
 			break;
 		}
 
-		self::$root_url = "http";
+		self::$base_www = "http";
 
 		if (array_key_exists("HTTPS", $_SERVER) && $_SERVER["HTTPS"])
-		self::$root_url .= "s";
+		self::$base_www .= "s";
 
-		self::$root_url .= "://" . $host;
+		self::$base_www .= "://" . $host;
 
 		return __CLASS__;
 	}
 
-	public static function url($file) {
-		return self::$root_url . "/" . $file;
+	public static function www($file) {
+		$www = self::$base_www;
+
+		if (substr($file, 0, 1) !== "/")
+		$www .= "/";
+
+		return $www . $file;
+	}
+
+	public static function www_print($file) {
+		print self::www($file);
+
+		return __CLASS__;
+	}
+
+	public static function full_dir($file) {
+		$full_dir = self::$base_dir;
+
+		if (substr($file, 0, 1) !== "/")
+		$full_dir .= "/";
+
+		return $full_dir . $file;
+	}
+
+	public static function full_dir_print($file) {
+		print self::full_dir($file);
+
+		return __CLASS__;
 	}
 		
 	public static function html_open() {
@@ -56,13 +97,19 @@ class selida {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/themes/smoothness/jquery-ui.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
-<script src="<?php print self::url("lib/selida.js"); ?>"></script>
+<script src="<?php self::www_print("lib/selida.js"); ?>"></script>
 <?php
 
 		return __CLASS__;
 	}
 
 	public static function head_close() {
+		if (!self::$favicon_ok)
+		self::favicon("images/sinergio.png");
+
+		if (!self::$title_ok)
+		self::title("Συνεργείο");
+
 		if (file_exists("main.css"))
 		self::css("main");
 
@@ -111,7 +158,7 @@ class selida {
 ?>
 <link rel="icon" type="<?php
 print self::$favicon_types[$tipos]; ?>" href="<?php
-print $favicon; ?>">
+self::www_print($favicon); ?>">
 <?php
 
 		return __CLASS__;

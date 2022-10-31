@@ -13,6 +13,7 @@ isagogi.init = function() {
 	attr('id', 'kritiria');
 	
 	const kritiriaFormaDOM = $('<form>').
+	attr('id', 'kritiriaForma').
 	on('submit', function() {
 		return false;
 	}).
@@ -57,12 +58,27 @@ isagogi.init = function() {
 	prop('type', 'text').
 	appendTo(kritiriaFormaDOM);
 
-	$('<button>').
-	prop('type', 'submit').
-	text('Υποβολή').
+	const kritiriaPanelDOM = $('<div>').
+	attr('id', 'kritiriaPanel').
 	appendTo(kritiriaFormaDOM);
-	
+
+	$('<input>').
+	prop('type', 'submit').
+	val('Υποβολή').
+	appendTo(kritiriaPanelDOM);
+
+	$('<input>').
+	prop('type', 'button').
+	val('Καθαρισμός').
+	appendTo(kritiriaPanelDOM);
+
+	$('<input>').
+	prop('type', 'button').
+	val('Άκυρο').
+	appendTo(kritiriaPanelDOM);
 
 	kritiriaDOM.
 	appendTo(isagogi.bodyDOM);
+
+	isagogi.idKritirioDOM.focus();
 };

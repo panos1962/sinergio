@@ -6,6 +6,10 @@ $(document).ready(function() {
 	menu.init();
 });
 
+$(window).on('unload', function() {
+	menu.unload();
+});
+
 menu.items = [
 	{
 		"desc": "Δελτία εισαγωγής",
@@ -23,6 +27,7 @@ menu.items = [
 ];
 
 menu.init = function() {
+	window.name = 'sinergio';
 	let bodyDOM = $(document.body);
 
 	let menuDOM = $('<div>').
@@ -56,11 +61,37 @@ menu.itemClick = function(e) {
 	item.action(item);
 };
 
-menu.isagogi = function(item) {
-	if (item.hasOwnProperty('window'))
-	item.window.close();
+menu.wlist = {};
+
+menu.isagogi = function() {
+	if (menu.wlist.hasOwnProperty('isagogi'))
+	menu.wlist['isagogi'].close();
 
 	setTimeout(function() {
-		item.window = window.open('isagogi', 'isagogi');
+		menu.wlist['isagogi'] = window.open('isagogi', 'isagogi');
 	}, 10);
 };
+
+menu.exagogi = function() {
+	if (menu.wlist.hasOwnProperty('exagogi'))
+	menu.wlist['exagogi'].close();
+
+	setTimeout(function() {
+		let w = window.open('exagogi', 'exagogi');
+		menu.wlist['exagogi'] = w;
+
+		$(w).on('unload', function() {
+console.log('asdasdasd');
+			delete menu.wlist['exagogi'];
+		});
+	}, 10);
+};
+
+menu.unload = function() {
+	for (let i in menu.wlist)
+	menu.wlist[i].close();
+};
+
+setInterval(function() {
+	console.log(menu.wlist);
+}, 2000);
