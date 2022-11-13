@@ -20,13 +20,13 @@ class sinergio {
 		kalosi::jQueryUI();
 
 		if (array_key_exists("favicon", $opts))
-		kalosi::title($opts["favicon"]);
+		kalosi::favicon($opts["favicon"]);
 
 		if (array_key_exists("title", $opts))
 		kalosi::title($opts["title"]);
 
 		if ($opts["database"])
-		kalosi::title($opts["database"]);
+		kalosi::database();
 
 		kalosi::
 		css(kalosi::www("lib/sinergio.css"))::
