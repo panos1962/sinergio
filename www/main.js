@@ -1,6 +1,6 @@
 "use strict";
 
-const menu = {};
+var menu = {};
 
 $(document).ready(function() {
 	menu.init();
@@ -22,6 +22,27 @@ menu.items = [
 		"desc": "Δελτία εξαγωγής",
 		"action": function(item) {
 			menu.exagogi(item);
+		},
+	},
+
+	{
+		"desc": "Υλικά",
+		"action": function(item) {
+			menu.iliko(item);
+		},
+	},
+
+	{
+		"desc": "Αποδέκτες",
+		"action": function(item) {
+			menu.apode(item);
+		},
+	},
+
+	{
+		"desc": "Προμηθευτές",
+		"action": function(item) {
+			menu.promi(item);
 		},
 	},
 ];
@@ -64,34 +85,27 @@ menu.itemClick = function(e) {
 menu.wlist = {};
 
 menu.isagogi = function() {
-	if (menu.wlist.hasOwnProperty('isagogi'))
-	menu.wlist['isagogi'].close();
+	if (!menu.wlist.hasOwnProperty('isagogi'))
+	menu.wlist['isagogi'] = window.open('isagogi/index.php', 'isagogi');
 
-	setTimeout(function() {
-		menu.wlist['isagogi'] = window.open('isagogi', 'isagogi');
-	}, 10);
+	menu.wlist['isagogi'].focus();
 };
 
 menu.exagogi = function() {
 	if (menu.wlist.hasOwnProperty('exagogi'))
 	menu.wlist['exagogi'].close();
 
-	setTimeout(function() {
-		let w = window.open('exagogi', 'exagogi');
-		menu.wlist['exagogi'] = w;
+	menu.wlist['exagogi'].focus();
+};
 
-		$(w).on('unload', function() {
-console.log('asdasdasd');
-			delete menu.wlist['exagogi'];
-		});
-	}, 10);
+menu.iliko = function() {
+	if (!menu.wlist.hasOwnProperty('iliko'))
+	menu.wlist['iliko'] = window.open('iliko/index.php', 'iliko');
+
+	menu.wlist['iliko'].focus();
 };
 
 menu.unload = function() {
 	for (let i in menu.wlist)
 	menu.wlist[i].close();
 };
-
-setInterval(function() {
-	console.log(menu.wlist);
-}, 2000);

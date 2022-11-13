@@ -4,21 +4,16 @@ progname="$(basename $0)"
 
 [ -z "${SINERGIO_BASEDIR}" ] && SINERGIO_BASEDIR="/var/opt/sinergio"
 
-[ -d "${SINERGIO_BASEDIR}" ] || {
-	echo "${progname}: ${SINERGIO_BASEDIR}: directory not found" >&2
-	exit 2
-}
-
 dir="${SINERGIO_BASEDIR}/database"
 
-[ -d "${dir}" ] || {
+if [ ! -d "${dir}" ]; then
 	echo "${progname}: ${dir}: directory not found" >&2
 	exit 2
-}
+fi
 
-cd "${dir}" 2>/dev/null || {
-	echo "${progname}: ${dir}: permission denied" >&2
+if ! cd "${dir}" 2>/dev/null; then
+	echo "${progname}: ${dir}: no permission" >&2
 	exit 2
-}
+fi
 
 cat schema.sql dbload.sql | mysql -u root -p

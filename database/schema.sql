@@ -2,8 +2,10 @@ DROP DATABASE IF EXISTS `sinergio`
 ;
 
 CREATE DATABASE `sinergio`
-DEFAULT CHARACTER SET = 'utf8'
-DEFAULT COLLATE = 'utf8_general_ci'
+DEFAULT CHARACTER SET = 'utf8mb4'
+-- DEFAULT COLLATE = 'utf8mb4_0900_ai_ci'
+DEFAULT COLLATE = 'utf8mb4_unicode_ci'
+-- DEFAULT COLLATE = 'utf8mb4_general_ci'
 ;
 
 USE `sinergio`

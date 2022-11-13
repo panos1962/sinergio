@@ -10,7 +10,6 @@ if [ -n "${wid}" ]; then
 fi
 
 url="http://localhost/sinergio/index.php"
-# url="${url}&debug"
 
 vivaldi "${url}" &
 
