@@ -13,8 +13,7 @@ class sinergio {
 
 		kalosi::
 		header_html()::
-		head_section()::
-		jQuery();
+		head_section();
 
 		if (array_key_exists("jQueryUI", $opts))
 		kalosi::jQueryUI();
